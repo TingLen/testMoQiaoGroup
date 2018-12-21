@@ -1,4 +1,4 @@
-package com.moqiao.com.moqiao;
+package com.moqiao.platform;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,11 +12,7 @@ public class ApplicationTests {
 	@Test
 	public void contextLoads() {
 		System.out.println("111");
-
 	}
 
-	public void tang(){
-		System.out.println("11333");
-	}
 }
 
