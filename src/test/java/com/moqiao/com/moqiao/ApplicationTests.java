@@ -12,7 +12,11 @@ public class ApplicationTests {
 	@Test
 	public void contextLoads() {
 		System.out.println("111");
+
 	}
 
+	public void tang(){
+		System.out.println("11333");
+	}
 }
 
