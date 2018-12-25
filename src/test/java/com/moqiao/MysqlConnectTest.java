@@ -16,26 +16,23 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MysqlConnectTest {
-//    @Autowired
     private  WorkUserExample workUserExample;
+
     @Autowired
     private WorkUserMapper workUserMapper;
-//    @Autowired
-//    private WorkUser workUser;
+
+    @Autowired
+    private WorkUser workUser;
+
     @Before
     public void before(){
         this.workUserExample = new WorkUserExample();
     }
 
     @Test
-    public void connectTest(){
-        workUserExample.or().andUsernameEqualTo("lmh111");
-         workUserMapper.countByExample(workUserExample);
-//        Assert.assertEquals(1,workUserList.size());
-    }
-
-    @Test
     public void findByNameTest(){
-
+        workUserExample.or().andUsercodeEqualTo("admin");
+        List<WorkUser> workUserList = workUserMapper.selectByExample(workUserExample);
+        Assert.assertEquals(1,workUserList.size());
     }
 }
