@@ -3,11 +3,8 @@ package com.moqiao.dao.mapper;
 import com.moqiao.pojo.WorkUser;
 import com.moqiao.pojo.WorkUserExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface WorkUserMapper {
     long countByExample(WorkUserExample example);
 
