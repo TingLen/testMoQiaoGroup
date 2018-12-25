@@ -41,7 +41,6 @@ public class MysqlConnectTest {
     @Test
     public void findByNameTest(){
 //        WorkUser w=new WorkUser();
-        workUser=  workUserMapper.find("管理员");
         System.out.println(workUser.getUsercode());
     }
 }
