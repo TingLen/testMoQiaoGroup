@@ -35,6 +35,7 @@ public class MysqlConnectTest {
 //        workUser=workUserMapper.selectByPrimaryKey("admin");
         List<WorkUser> workUsers = workUserMapper.selectByExample(workUserExample);
         System.out.println(workUsers.size());
+
 //        Assert.assertEquals(1,workUserList.size());
     }
 
