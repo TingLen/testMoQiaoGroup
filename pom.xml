@@ -92,10 +92,6 @@
 					<include>**/*.xml</include>
 				</includes>
 			</resource>
-<<<<<<< HEAD
-
-=======
->>>>>>> develop
 		</resources>
 	</build>
 
