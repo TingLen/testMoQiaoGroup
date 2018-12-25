@@ -3,7 +3,10 @@ package com.moqiao.dao.mapper;
 import com.moqiao.pojo.WorkUser;
 import com.moqiao.pojo.WorkUserExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface WorkUserMapper {
     long countByExample(WorkUserExample example);
@@ -33,4 +36,7 @@ public interface WorkUserMapper {
     int updateByPrimaryKeyWithBLOBs(WorkUser record);
 
     int updateByPrimaryKey(WorkUser record);
+
+    @Select("select * from work_user where username = #{name}")
+    public  WorkUser find(String name);
 }

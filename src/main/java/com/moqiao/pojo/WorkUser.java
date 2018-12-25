@@ -1,8 +1,9 @@
 package com.moqiao.pojo;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Component
 public class WorkUser {
     private String usercode;
 
