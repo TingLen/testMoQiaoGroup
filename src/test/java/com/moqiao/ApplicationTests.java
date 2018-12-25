@@ -1,4 +1,4 @@
-package com.moqiao.platform;
+package com.moqiao;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
