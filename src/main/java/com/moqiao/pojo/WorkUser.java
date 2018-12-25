@@ -1,8 +1,14 @@
 package com.moqiao.pojo;
 
+<<<<<<< HEAD
 import org.springframework.stereotype.Repository;
 
 @Repository
+=======
+import org.springframework.stereotype.Component;
+
+@Component
+>>>>>>> tangyq
 public class WorkUser {
     private String usercode;
 

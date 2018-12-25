@@ -4,7 +4,11 @@ import com.moqiao.pojo.WorkUser;
 import com.moqiao.pojo.WorkUserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+<<<<<<< HEAD
 
+=======
+@Mapper
+>>>>>>> tangyq
 public interface WorkUserMapper {
     long countByExample(WorkUserExample example);
 
