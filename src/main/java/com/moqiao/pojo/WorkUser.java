@@ -1,24 +1,6 @@
 package com.moqiao.pojo;
-
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-import org.springframework.stereotype.Repository;
-
-@Repository
-=======
 import org.springframework.stereotype.Component;
-
 @Component
->>>>>>> tangyq
-=======
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-
-@Component
->>>>>>> develop
->>>>>>> 32896e85d8d492bb3e400a2b4a8181c22dfaa792
 public class WorkUser {
     private String usercode;
 
