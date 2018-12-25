@@ -6,15 +6,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import org.apache.ibatis.annotations.Select;
->>>>>>> develop
 
-=======
-@Mapper
->>>>>>> tangyq
 public interface WorkUserMapper {
     long countByExample(WorkUserExample example);
 
