@@ -57,6 +57,6 @@
         <!--table name-->
 
         <table tableName="work_user"/>
-        <!--<table tableName="work_user"/>-->
+        <table tableName="qqc_mct"/>
     </context>
 </generatorConfiguration>

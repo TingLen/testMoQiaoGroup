@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moqiao.dao.mapper.QqcMctMapper">
+  <resultMap id="BaseResultMap" type="com.moqiao.pojo.QqcMct">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="DATETIME" jdbcType="TIMESTAMP" property="datetime" />
+    <result column="STOREY" jdbcType="DECIMAL" property="storey" />
+    <result column="CON_TEMP1" jdbcType="DECIMAL" property="conTemp1" />
+    <result column="CON_TEMP2" jdbcType="DECIMAL" property="conTemp2" />
+    <result column="CON_TEMP3" jdbcType="DECIMAL" property="conTemp3" />
+    <result column="CON_TEMP4" jdbcType="DECIMAL" property="conTemp4" />
+    <result column="CON_TEMP5" jdbcType="DECIMAL" property="conTemp5" />
+    <result column="CON_TEMP6" jdbcType="DECIMAL" property="conTemp6" />
+    <result column="CON_TEMP7" jdbcType="DECIMAL" property="conTemp7" />
+    <result column="WATERINLET" jdbcType="DECIMAL" property="waterinlet" />
+    <result column="WATEROUTLET1" jdbcType="DECIMAL" property="wateroutlet1" />
+    <result column="WATEROUTLET2" jdbcType="DECIMAL" property="wateroutlet2" />
+    <result column="COLDWATER_TEMP1" jdbcType="DECIMAL" property="coldwaterTemp1" />
+    <result column="COLDWATER_TEMP2" jdbcType="DECIMAL" property="coldwaterTemp2" />
+    <result column="HOTWATER_TEMP1" jdbcType="DECIMAL" property="hotwaterTemp1" />
+    <result column="HOTWATER_TEMP2" jdbcType="DECIMAL" property="hotwaterTemp2" />
+    <result column="ET" jdbcType="DECIMAL" property="et" />
+    <result column="FLOW" jdbcType="DECIMAL" property="flow" />
+    <result column="GUID" jdbcType="VARCHAR" property="guid" />
+    <result column="CASTINGSTATE" jdbcType="VARCHAR" property="castingstate" />
+    <result column="CTSTATUS" jdbcType="VARCHAR" property="ctstatus" />
+    <result column="JWSL" jdbcType="DECIMAL" property="jwsl" />
+    <result column="JWSLB" jdbcType="VARCHAR" property="jwslb" />
+    <result column="SWWS" jdbcType="DECIMAL" property="swws" />
+    <result column="SWWSB" jdbcType="VARCHAR" property="swwsb" />
+    <result column="CJWC" jdbcType="DECIMAL" property="cjwc" />
+    <result column="CJWCB" jdbcType="VARCHAR" property="cjwcb" />
+    <result column="LBWC" jdbcType="DECIMAL" property="lbwc" />
+    <result column="LBWCB" jdbcType="VARCHAR" property="lbwcb" />
+    <result column="CTMAX" jdbcType="DECIMAL" property="ctmax" />
+    <result column="CTMAXB" jdbcType="VARCHAR" property="ctmaxb" />
+    <result column="INTT_CTMAX" jdbcType="DECIMAL" property="inttCtmax" />
+    <result column="INTT_CTMAXB" jdbcType="VARCHAR" property="inttCtmaxb" />
+    <result column="PARTS" jdbcType="VARCHAR" property="parts" />
+    <result column="TEMPCC" jdbcType="DECIMAL" property="tempcc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, DATETIME, STOREY, CON_TEMP1, CON_TEMP2, CON_TEMP3, CON_TEMP4, CON_TEMP5, CON_TEMP6, 
+    CON_TEMP7, WATERINLET, WATEROUTLET1, WATEROUTLET2, COLDWATER_TEMP1, COLDWATER_TEMP2, 
+    HOTWATER_TEMP1, HOTWATER_TEMP2, ET, FLOW, GUID, CASTINGSTATE, CTSTATUS, JWSL, JWSLB, 
+    SWWS, SWWSB, CJWC, CJWCB, LBWC, LBWCB, CTMAX, CTMAXB, INTT_CTMAX, INTT_CTMAXB, PARTS, 
+    TEMPCC
+  </sql>
+  <select id="selectByExample" parameterType="com.moqiao.pojo.QqcMctExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from qqc_mct
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from qqc_mct
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from qqc_mct
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.moqiao.pojo.QqcMctExample">
+    delete from qqc_mct
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.moqiao.pojo.QqcMct">
+    insert into qqc_mct (ID, DATETIME, STOREY, 
+      CON_TEMP1, CON_TEMP2, CON_TEMP3, 
+      CON_TEMP4, CON_TEMP5, CON_TEMP6, 
+      CON_TEMP7, WATERINLET, WATEROUTLET1, 
+      WATEROUTLET2, COLDWATER_TEMP1, COLDWATER_TEMP2, 
+      HOTWATER_TEMP1, HOTWATER_TEMP2, ET, 
+      FLOW, GUID, CASTINGSTATE, 
+      CTSTATUS, JWSL, JWSLB, 
+      SWWS, SWWSB, CJWC, 
+      CJWCB, LBWC, LBWCB, 
+      CTMAX, CTMAXB, INTT_CTMAX, 
+      INTT_CTMAXB, PARTS, TEMPCC
+      )
+    values (#{id,jdbcType=DECIMAL}, #{datetime,jdbcType=TIMESTAMP}, #{storey,jdbcType=DECIMAL}, 
+      #{conTemp1,jdbcType=DECIMAL}, #{conTemp2,jdbcType=DECIMAL}, #{conTemp3,jdbcType=DECIMAL}, 
+      #{conTemp4,jdbcType=DECIMAL}, #{conTemp5,jdbcType=DECIMAL}, #{conTemp6,jdbcType=DECIMAL}, 
+      #{conTemp7,jdbcType=DECIMAL}, #{waterinlet,jdbcType=DECIMAL}, #{wateroutlet1,jdbcType=DECIMAL}, 
+      #{wateroutlet2,jdbcType=DECIMAL}, #{coldwaterTemp1,jdbcType=DECIMAL}, #{coldwaterTemp2,jdbcType=DECIMAL}, 
+      #{hotwaterTemp1,jdbcType=DECIMAL}, #{hotwaterTemp2,jdbcType=DECIMAL}, #{et,jdbcType=DECIMAL}, 
+      #{flow,jdbcType=DECIMAL}, #{guid,jdbcType=VARCHAR}, #{castingstate,jdbcType=VARCHAR}, 
+      #{ctstatus,jdbcType=VARCHAR}, #{jwsl,jdbcType=DECIMAL}, #{jwslb,jdbcType=VARCHAR}, 
+      #{swws,jdbcType=DECIMAL}, #{swwsb,jdbcType=VARCHAR}, #{cjwc,jdbcType=DECIMAL}, 
+      #{cjwcb,jdbcType=VARCHAR}, #{lbwc,jdbcType=DECIMAL}, #{lbwcb,jdbcType=VARCHAR}, 
+      #{ctmax,jdbcType=DECIMAL}, #{ctmaxb,jdbcType=VARCHAR}, #{inttCtmax,jdbcType=DECIMAL}, 
+      #{inttCtmaxb,jdbcType=VARCHAR}, #{parts,jdbcType=VARCHAR}, #{tempcc,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.moqiao.pojo.QqcMct">
+    insert into qqc_mct
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="datetime != null">
+        DATETIME,
+      </if>
+      <if test="storey != null">
+        STOREY,
+      </if>
+      <if test="conTemp1 != null">
+        CON_TEMP1,
+      </if>
+      <if test="conTemp2 != null">
+        CON_TEMP2,
+      </if>
+      <if test="conTemp3 != null">
+        CON_TEMP3,
+      </if>
+      <if test="conTemp4 != null">
+        CON_TEMP4,
+      </if>
+      <if test="conTemp5 != null">
+        CON_TEMP5,
+      </if>
+      <if test="conTemp6 != null">
+        CON_TEMP6,
+      </if>
+      <if test="conTemp7 != null">
+        CON_TEMP7,
+      </if>
+      <if test="waterinlet != null">
+        WATERINLET,
+      </if>
+      <if test="wateroutlet1 != null">
+        WATEROUTLET1,
+      </if>
+      <if test="wateroutlet2 != null">
+        WATEROUTLET2,
+      </if>
+      <if test="coldwaterTemp1 != null">
+        COLDWATER_TEMP1,
+      </if>
+      <if test="coldwaterTemp2 != null">
+        COLDWATER_TEMP2,
+      </if>
+      <if test="hotwaterTemp1 != null">
+        HOTWATER_TEMP1,
+      </if>
+      <if test="hotwaterTemp2 != null">
+        HOTWATER_TEMP2,
+      </if>
+      <if test="et != null">
+        ET,
+      </if>
+      <if test="flow != null">
+        FLOW,
+      </if>
+      <if test="guid != null">
+        GUID,
+      </if>
+      <if test="castingstate != null">
+        CASTINGSTATE,
+      </if>
+      <if test="ctstatus != null">
+        CTSTATUS,
+      </if>
+      <if test="jwsl != null">
+        JWSL,
+      </if>
+      <if test="jwslb != null">
+        JWSLB,
+      </if>
+      <if test="swws != null">
+        SWWS,
+      </if>
+      <if test="swwsb != null">
+        SWWSB,
+      </if>
+      <if test="cjwc != null">
+        CJWC,
+      </if>
+      <if test="cjwcb != null">
+        CJWCB,
+      </if>
+      <if test="lbwc != null">
+        LBWC,
+      </if>
+      <if test="lbwcb != null">
+        LBWCB,
+      </if>
+      <if test="ctmax != null">
+        CTMAX,
+      </if>
+      <if test="ctmaxb != null">
+        CTMAXB,
+      </if>
+      <if test="inttCtmax != null">
+        INTT_CTMAX,
+      </if>
+      <if test="inttCtmaxb != null">
+        INTT_CTMAXB,
+      </if>
+      <if test="parts != null">
+        PARTS,
+      </if>
+      <if test="tempcc != null">
+        TEMPCC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="datetime != null">
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storey != null">
+        #{storey,jdbcType=DECIMAL},
+      </if>
+      <if test="conTemp1 != null">
+        #{conTemp1,jdbcType=DECIMAL},
+      </if>
+      <if test="conTemp2 != null">
+        #{conTemp2,jdbcType=DECIMAL},
+      </if>
+      <if test="conTemp3 != null">
+        #{conTemp3,jdbcType=DECIMAL},
+      </if>
+      <if test="conTemp4 != null">
+        #{conTemp4,jdbcType=DECIMAL},
+      </if>
+      <if test="conTemp5 != null">
+        #{conTemp5,jdbcType=DECIMAL},
+      </if>
+      <if test="conTemp6 != null">
+        #{conTemp6,jdbcType=DECIMAL},
+      </if>
+      <if test="conTemp7 != null">
+        #{conTemp7,jdbcType=DECIMAL},
+      </if>
+      <if test="waterinlet != null">
+        #{waterinlet,jdbcType=DECIMAL},
+      </if>
+      <if test="wateroutlet1 != null">
+        #{wateroutlet1,jdbcType=DECIMAL},
+      </if>
+      <if test="wateroutlet2 != null">
+        #{wateroutlet2,jdbcType=DECIMAL},
+      </if>
+      <if test="coldwaterTemp1 != null">
+        #{coldwaterTemp1,jdbcType=DECIMAL},
+      </if>
+      <if test="coldwaterTemp2 != null">
+        #{coldwaterTemp2,jdbcType=DECIMAL},
+      </if>
+      <if test="hotwaterTemp1 != null">
+        #{hotwaterTemp1,jdbcType=DECIMAL},
+      </if>
+      <if test="hotwaterTemp2 != null">
+        #{hotwaterTemp2,jdbcType=DECIMAL},
+      </if>
+      <if test="et != null">
+        #{et,jdbcType=DECIMAL},
+      </if>
+      <if test="flow != null">
+        #{flow,jdbcType=DECIMAL},
+      </if>
+      <if test="guid != null">
+        #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="castingstate != null">
+        #{castingstate,jdbcType=VARCHAR},
+      </if>
+      <if test="ctstatus != null">
+        #{ctstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="jwsl != null">
+        #{jwsl,jdbcType=DECIMAL},
+      </if>
+      <if test="jwslb != null">
+        #{jwslb,jdbcType=VARCHAR},
+      </if>
+      <if test="swws != null">
+        #{swws,jdbcType=DECIMAL},
+      </if>
+      <if test="swwsb != null">
+        #{swwsb,jdbcType=VARCHAR},
+      </if>
+      <if test="cjwc != null">
+        #{cjwc,jdbcType=DECIMAL},
+      </if>
+      <if test="cjwcb != null">
+        #{cjwcb,jdbcType=VARCHAR},
+      </if>
+      <if test="lbwc != null">
+        #{lbwc,jdbcType=DECIMAL},
+      </if>
+      <if test="lbwcb != null">
+        #{lbwcb,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmax != null">
+        #{ctmax,jdbcType=DECIMAL},
+      </if>
+      <if test="ctmaxb != null">
+        #{ctmaxb,jdbcType=VARCHAR},
+      </if>
+      <if test="inttCtmax != null">
+        #{inttCtmax,jdbcType=DECIMAL},
+      </if>
+      <if test="inttCtmaxb != null">
+        #{inttCtmaxb,jdbcType=VARCHAR},
+      </if>
+      <if test="parts != null">
+        #{parts,jdbcType=VARCHAR},
+      </if>
+      <if test="tempcc != null">
+        #{tempcc,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.moqiao.pojo.QqcMctExample" resultType="java.lang.Long">
+    select count(*) from qqc_mct
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update qqc_mct
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.datetime != null">
+        DATETIME = #{record.datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.storey != null">
+        STOREY = #{record.storey,jdbcType=DECIMAL},
+      </if>
+      <if test="record.conTemp1 != null">
+        CON_TEMP1 = #{record.conTemp1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.conTemp2 != null">
+        CON_TEMP2 = #{record.conTemp2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.conTemp3 != null">
+        CON_TEMP3 = #{record.conTemp3,jdbcType=DECIMAL},
+      </if>
+      <if test="record.conTemp4 != null">
+        CON_TEMP4 = #{record.conTemp4,jdbcType=DECIMAL},
+      </if>
+      <if test="record.conTemp5 != null">
+        CON_TEMP5 = #{record.conTemp5,jdbcType=DECIMAL},
+      </if>
+      <if test="record.conTemp6 != null">
+        CON_TEMP6 = #{record.conTemp6,jdbcType=DECIMAL},
+      </if>
+      <if test="record.conTemp7 != null">
+        CON_TEMP7 = #{record.conTemp7,jdbcType=DECIMAL},
+      </if>
+      <if test="record.waterinlet != null">
+        WATERINLET = #{record.waterinlet,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wateroutlet1 != null">
+        WATEROUTLET1 = #{record.wateroutlet1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wateroutlet2 != null">
+        WATEROUTLET2 = #{record.wateroutlet2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.coldwaterTemp1 != null">
+        COLDWATER_TEMP1 = #{record.coldwaterTemp1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.coldwaterTemp2 != null">
+        COLDWATER_TEMP2 = #{record.coldwaterTemp2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.hotwaterTemp1 != null">
+        HOTWATER_TEMP1 = #{record.hotwaterTemp1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.hotwaterTemp2 != null">
+        HOTWATER_TEMP2 = #{record.hotwaterTemp2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.et != null">
+        ET = #{record.et,jdbcType=DECIMAL},
+      </if>
+      <if test="record.flow != null">
+        FLOW = #{record.flow,jdbcType=DECIMAL},
+      </if>
+      <if test="record.guid != null">
+        GUID = #{record.guid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.castingstate != null">
+        CASTINGSTATE = #{record.castingstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctstatus != null">
+        CTSTATUS = #{record.ctstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jwsl != null">
+        JWSL = #{record.jwsl,jdbcType=DECIMAL},
+      </if>
+      <if test="record.jwslb != null">
+        JWSLB = #{record.jwslb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.swws != null">
+        SWWS = #{record.swws,jdbcType=DECIMAL},
+      </if>
+      <if test="record.swwsb != null">
+        SWWSB = #{record.swwsb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cjwc != null">
+        CJWC = #{record.cjwc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cjwcb != null">
+        CJWCB = #{record.cjwcb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lbwc != null">
+        LBWC = #{record.lbwc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lbwcb != null">
+        LBWCB = #{record.lbwcb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctmax != null">
+        CTMAX = #{record.ctmax,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ctmaxb != null">
+        CTMAXB = #{record.ctmaxb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inttCtmax != null">
+        INTT_CTMAX = #{record.inttCtmax,jdbcType=DECIMAL},
+      </if>
+      <if test="record.inttCtmaxb != null">
+        INTT_CTMAXB = #{record.inttCtmaxb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parts != null">
+        PARTS = #{record.parts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tempcc != null">
+        TEMPCC = #{record.tempcc,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update qqc_mct
+    set ID = #{record.id,jdbcType=DECIMAL},
+      DATETIME = #{record.datetime,jdbcType=TIMESTAMP},
+      STOREY = #{record.storey,jdbcType=DECIMAL},
+      CON_TEMP1 = #{record.conTemp1,jdbcType=DECIMAL},
+      CON_TEMP2 = #{record.conTemp2,jdbcType=DECIMAL},
+      CON_TEMP3 = #{record.conTemp3,jdbcType=DECIMAL},
+      CON_TEMP4 = #{record.conTemp4,jdbcType=DECIMAL},
+      CON_TEMP5 = #{record.conTemp5,jdbcType=DECIMAL},
+      CON_TEMP6 = #{record.conTemp6,jdbcType=DECIMAL},
+      CON_TEMP7 = #{record.conTemp7,jdbcType=DECIMAL},
+      WATERINLET = #{record.waterinlet,jdbcType=DECIMAL},
+      WATEROUTLET1 = #{record.wateroutlet1,jdbcType=DECIMAL},
+      WATEROUTLET2 = #{record.wateroutlet2,jdbcType=DECIMAL},
+      COLDWATER_TEMP1 = #{record.coldwaterTemp1,jdbcType=DECIMAL},
+      COLDWATER_TEMP2 = #{record.coldwaterTemp2,jdbcType=DECIMAL},
+      HOTWATER_TEMP1 = #{record.hotwaterTemp1,jdbcType=DECIMAL},
+      HOTWATER_TEMP2 = #{record.hotwaterTemp2,jdbcType=DECIMAL},
+      ET = #{record.et,jdbcType=DECIMAL},
+      FLOW = #{record.flow,jdbcType=DECIMAL},
+      GUID = #{record.guid,jdbcType=VARCHAR},
+      CASTINGSTATE = #{record.castingstate,jdbcType=VARCHAR},
+      CTSTATUS = #{record.ctstatus,jdbcType=VARCHAR},
+      JWSL = #{record.jwsl,jdbcType=DECIMAL},
+      JWSLB = #{record.jwslb,jdbcType=VARCHAR},
+      SWWS = #{record.swws,jdbcType=DECIMAL},
+      SWWSB = #{record.swwsb,jdbcType=VARCHAR},
+      CJWC = #{record.cjwc,jdbcType=DECIMAL},
+      CJWCB = #{record.cjwcb,jdbcType=VARCHAR},
+      LBWC = #{record.lbwc,jdbcType=DECIMAL},
+      LBWCB = #{record.lbwcb,jdbcType=VARCHAR},
+      CTMAX = #{record.ctmax,jdbcType=DECIMAL},
+      CTMAXB = #{record.ctmaxb,jdbcType=VARCHAR},
+      INTT_CTMAX = #{record.inttCtmax,jdbcType=DECIMAL},
+      INTT_CTMAXB = #{record.inttCtmaxb,jdbcType=VARCHAR},
+      PARTS = #{record.parts,jdbcType=VARCHAR},
+      TEMPCC = #{record.tempcc,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.moqiao.pojo.QqcMct">
+    update qqc_mct
+    <set>
+      <if test="datetime != null">
+        DATETIME = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storey != null">
+        STOREY = #{storey,jdbcType=DECIMAL},
+      </if>
+      <if test="conTemp1 != null">
+        CON_TEMP1 = #{conTemp1,jdbcType=DECIMAL},
+      </if>
+      <if test="conTemp2 != null">
+        CON_TEMP2 = #{conTemp2,jdbcType=DECIMAL},
+      </if>
+      <if test="conTemp3 != null">
+        CON_TEMP3 = #{conTemp3,jdbcType=DECIMAL},
+      </if>
+      <if test="conTemp4 != null">
+        CON_TEMP4 = #{conTemp4,jdbcType=DECIMAL},
+      </if>
+      <if test="conTemp5 != null">
+        CON_TEMP5 = #{conTemp5,jdbcType=DECIMAL},
+      </if>
+      <if test="conTemp6 != null">
+        CON_TEMP6 = #{conTemp6,jdbcType=DECIMAL},
+      </if>
+      <if test="conTemp7 != null">
+        CON_TEMP7 = #{conTemp7,jdbcType=DECIMAL},
+      </if>
+      <if test="waterinlet != null">
+        WATERINLET = #{waterinlet,jdbcType=DECIMAL},
+      </if>
+      <if test="wateroutlet1 != null">
+        WATEROUTLET1 = #{wateroutlet1,jdbcType=DECIMAL},
+      </if>
+      <if test="wateroutlet2 != null">
+        WATEROUTLET2 = #{wateroutlet2,jdbcType=DECIMAL},
+      </if>
+      <if test="coldwaterTemp1 != null">
+        COLDWATER_TEMP1 = #{coldwaterTemp1,jdbcType=DECIMAL},
+      </if>
+      <if test="coldwaterTemp2 != null">
+        COLDWATER_TEMP2 = #{coldwaterTemp2,jdbcType=DECIMAL},
+      </if>
+      <if test="hotwaterTemp1 != null">
+        HOTWATER_TEMP1 = #{hotwaterTemp1,jdbcType=DECIMAL},
+      </if>
+      <if test="hotwaterTemp2 != null">
+        HOTWATER_TEMP2 = #{hotwaterTemp2,jdbcType=DECIMAL},
+      </if>
+      <if test="et != null">
+        ET = #{et,jdbcType=DECIMAL},
+      </if>
+      <if test="flow != null">
+        FLOW = #{flow,jdbcType=DECIMAL},
+      </if>
+      <if test="guid != null">
+        GUID = #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="castingstate != null">
+        CASTINGSTATE = #{castingstate,jdbcType=VARCHAR},
+      </if>
+      <if test="ctstatus != null">
+        CTSTATUS = #{ctstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="jwsl != null">
+        JWSL = #{jwsl,jdbcType=DECIMAL},
+      </if>
+      <if test="jwslb != null">
+        JWSLB = #{jwslb,jdbcType=VARCHAR},
+      </if>
+      <if test="swws != null">
+        SWWS = #{swws,jdbcType=DECIMAL},
+      </if>
+      <if test="swwsb != null">
+        SWWSB = #{swwsb,jdbcType=VARCHAR},
+      </if>
+      <if test="cjwc != null">
+        CJWC = #{cjwc,jdbcType=DECIMAL},
+      </if>
+      <if test="cjwcb != null">
+        CJWCB = #{cjwcb,jdbcType=VARCHAR},
+      </if>
+      <if test="lbwc != null">
+        LBWC = #{lbwc,jdbcType=DECIMAL},
+      </if>
+      <if test="lbwcb != null">
+        LBWCB = #{lbwcb,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmax != null">
+        CTMAX = #{ctmax,jdbcType=DECIMAL},
+      </if>
+      <if test="ctmaxb != null">
+        CTMAXB = #{ctmaxb,jdbcType=VARCHAR},
+      </if>
+      <if test="inttCtmax != null">
+        INTT_CTMAX = #{inttCtmax,jdbcType=DECIMAL},
+      </if>
+      <if test="inttCtmaxb != null">
+        INTT_CTMAXB = #{inttCtmaxb,jdbcType=VARCHAR},
+      </if>
+      <if test="parts != null">
+        PARTS = #{parts,jdbcType=VARCHAR},
+      </if>
+      <if test="tempcc != null">
+        TEMPCC = #{tempcc,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.moqiao.pojo.QqcMct">
+    update qqc_mct
+    set DATETIME = #{datetime,jdbcType=TIMESTAMP},
+      STOREY = #{storey,jdbcType=DECIMAL},
+      CON_TEMP1 = #{conTemp1,jdbcType=DECIMAL},
+      CON_TEMP2 = #{conTemp2,jdbcType=DECIMAL},
+      CON_TEMP3 = #{conTemp3,jdbcType=DECIMAL},
+      CON_TEMP4 = #{conTemp4,jdbcType=DECIMAL},
+      CON_TEMP5 = #{conTemp5,jdbcType=DECIMAL},
+      CON_TEMP6 = #{conTemp6,jdbcType=DECIMAL},
+      CON_TEMP7 = #{conTemp7,jdbcType=DECIMAL},
+      WATERINLET = #{waterinlet,jdbcType=DECIMAL},
+      WATEROUTLET1 = #{wateroutlet1,jdbcType=DECIMAL},
+      WATEROUTLET2 = #{wateroutlet2,jdbcType=DECIMAL},
+      COLDWATER_TEMP1 = #{coldwaterTemp1,jdbcType=DECIMAL},
+      COLDWATER_TEMP2 = #{coldwaterTemp2,jdbcType=DECIMAL},
+      HOTWATER_TEMP1 = #{hotwaterTemp1,jdbcType=DECIMAL},
+      HOTWATER_TEMP2 = #{hotwaterTemp2,jdbcType=DECIMAL},
+      ET = #{et,jdbcType=DECIMAL},
+      FLOW = #{flow,jdbcType=DECIMAL},
+      GUID = #{guid,jdbcType=VARCHAR},
+      CASTINGSTATE = #{castingstate,jdbcType=VARCHAR},
+      CTSTATUS = #{ctstatus,jdbcType=VARCHAR},
+      JWSL = #{jwsl,jdbcType=DECIMAL},
+      JWSLB = #{jwslb,jdbcType=VARCHAR},
+      SWWS = #{swws,jdbcType=DECIMAL},
+      SWWSB = #{swwsb,jdbcType=VARCHAR},
+      CJWC = #{cjwc,jdbcType=DECIMAL},
+      CJWCB = #{cjwcb,jdbcType=VARCHAR},
+      LBWC = #{lbwc,jdbcType=DECIMAL},
+      LBWCB = #{lbwcb,jdbcType=VARCHAR},
+      CTMAX = #{ctmax,jdbcType=DECIMAL},
+      CTMAXB = #{ctmaxb,jdbcType=VARCHAR},
+      INTT_CTMAX = #{inttCtmax,jdbcType=DECIMAL},
+      INTT_CTMAXB = #{inttCtmaxb,jdbcType=VARCHAR},
+      PARTS = #{parts,jdbcType=VARCHAR},
+      TEMPCC = #{tempcc,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>
