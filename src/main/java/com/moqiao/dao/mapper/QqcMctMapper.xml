@@ -699,4 +699,10 @@
       TEMPCC = #{tempcc,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+  <select id="selectPriGuid" resultType="QQC_MCT" parameterType="string">
+    select guid from QQC_MCT t
+                                where PARTS=#{parts}
+                             group by t.guid
+                              order by max(t.datetime)
+  </select>
 </mapper>

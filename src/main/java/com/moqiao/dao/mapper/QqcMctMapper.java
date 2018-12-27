@@ -28,4 +28,7 @@ public interface QqcMctMapper {
     int updateByPrimaryKeySelective(QqcMct record);
 
     int updateByPrimaryKey(QqcMct record);
+
+    List<QqcMct> selectPriGuid(String Parts);
+
 }
