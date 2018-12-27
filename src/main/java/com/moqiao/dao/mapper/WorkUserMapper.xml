@@ -6,12 +6,10 @@
     <result column="USERNAME" jdbcType="VARCHAR" property="username" />
     <result column="USERSEX" jdbcType="VARCHAR" property="usersex" />
     <result column="DEPTTYPE" jdbcType="VARCHAR" property="depttype" />
+    <result column="USERPASSWORD" jdbcType="VARCHAR" property="userpassword" />
     <result column="DEPTCODE" jdbcType="VARCHAR" property="deptcode" />
     <result column="TITLECODE" jdbcType="VARCHAR" property="titlecode" />
     <result column="EPSCODE" jdbcType="VARCHAR" property="epscode" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.moqiao.pojo.WorkUser">
-    <result column="USERPASSWORD" jdbcType="LONGVARCHAR" property="userpassword" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,27 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    USERCODE, USERNAME, USERSEX, DEPTTYPE, DEPTCODE, TITLECODE, EPSCODE
+    USERCODE, USERNAME, USERSEX, DEPTTYPE, USERPASSWORD, DEPTCODE, TITLECODE, EPSCODE
   </sql>
-  <sql id="Blob_Column_List">
-    USERPASSWORD
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.moqiao.pojo.WorkUserExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from work_user
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.moqiao.pojo.WorkUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -107,11 +86,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from work_user
     where USERCODE = #{usercode,jdbcType=VARCHAR}
   </select>
@@ -127,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.moqiao.pojo.WorkUser">
     insert into work_user (USERCODE, USERNAME, USERSEX, 
-      DEPTTYPE, DEPTCODE, TITLECODE, 
-      EPSCODE, USERPASSWORD)
+      DEPTTYPE, USERPASSWORD, DEPTCODE, 
+      TITLECODE, EPSCODE)
     values (#{usercode,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{usersex,jdbcType=VARCHAR}, 
-      #{depttype,jdbcType=VARCHAR}, #{deptcode,jdbcType=VARCHAR}, #{titlecode,jdbcType=VARCHAR}, 
-      #{epscode,jdbcType=VARCHAR}, #{userpassword,jdbcType=LONGVARCHAR})
+      #{depttype,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR}, #{deptcode,jdbcType=VARCHAR}, 
+      #{titlecode,jdbcType=VARCHAR}, #{epscode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.moqiao.pojo.WorkUser">
     insert into work_user
@@ -148,6 +125,9 @@
       <if test="depttype != null">
         DEPTTYPE,
       </if>
+      <if test="userpassword != null">
+        USERPASSWORD,
+      </if>
       <if test="deptcode != null">
         DEPTCODE,
       </if>
@@ -156,9 +136,6 @@
       </if>
       <if test="epscode != null">
         EPSCODE,
-      </if>
-      <if test="userpassword != null">
-        USERPASSWORD,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -174,6 +151,9 @@
       <if test="depttype != null">
         #{depttype,jdbcType=VARCHAR},
       </if>
+      <if test="userpassword != null">
+        #{userpassword,jdbcType=VARCHAR},
+      </if>
       <if test="deptcode != null">
         #{deptcode,jdbcType=VARCHAR},
       </if>
@@ -182,9 +162,6 @@
       </if>
       <if test="epscode != null">
         #{epscode,jdbcType=VARCHAR},
-      </if>
-      <if test="userpassword != null">
-        #{userpassword,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -209,6 +186,9 @@
       <if test="record.depttype != null">
         DEPTTYPE = #{record.depttype,jdbcType=VARCHAR},
       </if>
+      <if test="record.userpassword != null">
+        USERPASSWORD = #{record.userpassword,jdbcType=VARCHAR},
+      </if>
       <if test="record.deptcode != null">
         DEPTCODE = #{record.deptcode,jdbcType=VARCHAR},
       </if>
@@ -218,24 +198,7 @@
       <if test="record.epscode != null">
         EPSCODE = #{record.epscode,jdbcType=VARCHAR},
       </if>
-      <if test="record.userpassword != null">
-        USERPASSWORD = #{record.userpassword,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update work_user
-    set USERCODE = #{record.usercode,jdbcType=VARCHAR},
-      USERNAME = #{record.username,jdbcType=VARCHAR},
-      USERSEX = #{record.usersex,jdbcType=VARCHAR},
-      DEPTTYPE = #{record.depttype,jdbcType=VARCHAR},
-      DEPTCODE = #{record.deptcode,jdbcType=VARCHAR},
-      TITLECODE = #{record.titlecode,jdbcType=VARCHAR},
-      EPSCODE = #{record.epscode,jdbcType=VARCHAR},
-      USERPASSWORD = #{record.userpassword,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -246,6 +209,7 @@
       USERNAME = #{record.username,jdbcType=VARCHAR},
       USERSEX = #{record.usersex,jdbcType=VARCHAR},
       DEPTTYPE = #{record.depttype,jdbcType=VARCHAR},
+      USERPASSWORD = #{record.userpassword,jdbcType=VARCHAR},
       DEPTCODE = #{record.deptcode,jdbcType=VARCHAR},
       TITLECODE = #{record.titlecode,jdbcType=VARCHAR},
       EPSCODE = #{record.epscode,jdbcType=VARCHAR}
@@ -265,6 +229,9 @@
       <if test="depttype != null">
         DEPTTYPE = #{depttype,jdbcType=VARCHAR},
       </if>
+      <if test="userpassword != null">
+        USERPASSWORD = #{userpassword,jdbcType=VARCHAR},
+      </if>
       <if test="deptcode != null">
         DEPTCODE = #{deptcode,jdbcType=VARCHAR},
       </if>
@@ -274,21 +241,7 @@
       <if test="epscode != null">
         EPSCODE = #{epscode,jdbcType=VARCHAR},
       </if>
-      <if test="userpassword != null">
-        USERPASSWORD = #{userpassword,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where USERCODE = #{usercode,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.moqiao.pojo.WorkUser">
-    update work_user
-    set USERNAME = #{username,jdbcType=VARCHAR},
-      USERSEX = #{usersex,jdbcType=VARCHAR},
-      DEPTTYPE = #{depttype,jdbcType=VARCHAR},
-      DEPTCODE = #{deptcode,jdbcType=VARCHAR},
-      TITLECODE = #{titlecode,jdbcType=VARCHAR},
-      EPSCODE = #{epscode,jdbcType=VARCHAR},
-      USERPASSWORD = #{userpassword,jdbcType=LONGVARCHAR}
     where USERCODE = #{usercode,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.moqiao.pojo.WorkUser">
@@ -296,6 +249,7 @@
     set USERNAME = #{username,jdbcType=VARCHAR},
       USERSEX = #{usersex,jdbcType=VARCHAR},
       DEPTTYPE = #{depttype,jdbcType=VARCHAR},
+      USERPASSWORD = #{userpassword,jdbcType=VARCHAR},
       DEPTCODE = #{deptcode,jdbcType=VARCHAR},
       TITLECODE = #{titlecode,jdbcType=VARCHAR},
       EPSCODE = #{epscode,jdbcType=VARCHAR}

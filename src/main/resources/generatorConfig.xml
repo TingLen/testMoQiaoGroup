@@ -56,7 +56,9 @@
 
         <!--table name-->
 
-        <table tableName="work_user"/>
+        <table tableName="work_user">
+            <columnOverride column="USERPASSWORD" jdbcType="VARCHAR"/>
+        </table>
         <table tableName="qqc_mct"/>
     </context>
 </generatorConfiguration>

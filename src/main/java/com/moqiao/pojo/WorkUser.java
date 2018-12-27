@@ -1,6 +1,8 @@
 package com.moqiao.pojo;
-import org.springframework.stereotype.Component;
-@Component
+
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class WorkUser {
     private String usercode;
 
@@ -10,13 +12,13 @@ public class WorkUser {
 
     private String depttype;
 
+    private String userpassword;
+
     private String deptcode;
 
     private String titlecode;
 
     private String epscode;
-
-    private String userpassword;
 
     public String getUsercode() {
         return usercode;
@@ -50,6 +52,14 @@ public class WorkUser {
         this.depttype = depttype == null ? null : depttype.trim();
     }
 
+    public String getUserpassword() {
+        return userpassword;
+    }
+
+    public void setUserpassword(String userpassword) {
+        this.userpassword = userpassword == null ? null : userpassword.trim();
+    }
+
     public String getDeptcode() {
         return deptcode;
     }
@@ -72,13 +82,5 @@ public class WorkUser {
 
     public void setEpscode(String epscode) {
         this.epscode = epscode == null ? null : epscode.trim();
-    }
-
-    public String getUserpassword() {
-        return userpassword;
-    }
-
-    public void setUserpassword(String userpassword) {
-        this.userpassword = userpassword == null ? null : userpassword.trim();
     }
 }

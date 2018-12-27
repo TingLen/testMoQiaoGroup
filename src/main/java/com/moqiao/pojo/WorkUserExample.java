@@ -1,5 +1,7 @@
 package com.moqiao.pojo;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -381,6 +383,76 @@ public class WorkUserExample {
 
         public Criteria andDepttypeNotBetween(String value1, String value2) {
             addCriterion("DEPTTYPE not between", value1, value2, "depttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpasswordIsNull() {
+            addCriterion("USERPASSWORD is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpasswordIsNotNull() {
+            addCriterion("USERPASSWORD is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpasswordEqualTo(String value) {
+            addCriterion("USERPASSWORD =", value, "userpassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpasswordNotEqualTo(String value) {
+            addCriterion("USERPASSWORD <>", value, "userpassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpasswordGreaterThan(String value) {
+            addCriterion("USERPASSWORD >", value, "userpassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpasswordGreaterThanOrEqualTo(String value) {
+            addCriterion("USERPASSWORD >=", value, "userpassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpasswordLessThan(String value) {
+            addCriterion("USERPASSWORD <", value, "userpassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpasswordLessThanOrEqualTo(String value) {
+            addCriterion("USERPASSWORD <=", value, "userpassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpasswordLike(String value) {
+            addCriterion("USERPASSWORD like", value, "userpassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpasswordNotLike(String value) {
+            addCriterion("USERPASSWORD not like", value, "userpassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpasswordIn(List<String> values) {
+            addCriterion("USERPASSWORD in", values, "userpassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpasswordNotIn(List<String> values) {
+            addCriterion("USERPASSWORD not in", values, "userpassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpasswordBetween(String value1, String value2) {
+            addCriterion("USERPASSWORD between", value1, value2, "userpassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpasswordNotBetween(String value1, String value2) {
+            addCriterion("USERPASSWORD not between", value1, value2, "userpassword");
             return (Criteria) this;
         }
 
