@@ -1,8 +1,10 @@
 package com.moqiao.pojo;
 
+import org.springframework.stereotype.Repository;
+
 import java.math.BigDecimal;
 import java.util.Date;
-
+@Repository
 public class QqcMct {
     private BigDecimal id;
 
@@ -363,4 +365,8 @@ public class QqcMct {
     public void setTempcc(BigDecimal tempcc) {
         this.tempcc = tempcc;
     }
+
+
+
+
 }

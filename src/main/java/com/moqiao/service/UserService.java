@@ -19,9 +19,9 @@ public class UserService {
 
     public WorkUser login(String usercode, String userpassword){
         example.or().andUsercodeEqualTo(usercode).andUserpasswordEqualTo(userpassword);
-        List<WorkUser> workUserList = workUserMapper.selectByExample(example);
-        if(workUserList.size() > 0){
-            return workUserList.get(0);
+            List<WorkUser> workUserList = workUserMapper.selectByExample(example);
+            if(workUserList.size() > 0){
+                return workUserList.get(0);
         }
         return null;
     }

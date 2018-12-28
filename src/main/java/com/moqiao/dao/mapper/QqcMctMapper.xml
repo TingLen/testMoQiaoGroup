@@ -699,10 +699,43 @@
       TEMPCC = #{tempcc,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
-  <select id="selectPriGuid" resultType="QQC_MCT" parameterType="string">
+  <select id="selectPriGuid" resultType="com.moqiao.pojo.QqcMct" parameterType="java.lang.String">
     select guid from QQC_MCT t
                                 where PARTS=#{parts}
                              group by t.guid
                               order by max(t.datetime)
   </select>
+
+  <select id="selectByGuid" resultType="com.moqiao.pojo.QqcMct" parameterType="java.lang.String">
+    select * from QQC_MCT t
+                                where guid=#{guid}
+  </select>
+
+  <!--<select id="selectchart3d" resultMap="chart3d" parameterType="com.moqiao.pojo.QqcMct">-->
+        <!--select t.Datetime,t.Coldwater_Temp1,t.Coldwater_Temp2,t.Et,t.Hotwater_Temp1,t.storey,-->
+    <!--CONCAT_WS(',',t1.con_temp1,t1.con_temp2,t1.con_temp3,t1.con_temp4,t1.con_temp5,t1.con_temp6,t1.con_temp7) temp1-->
+    <!--CONCAT_WS(',',t2.con_temp1,t2.con_temp2,t2.con_temp3,t2.con_temp4,t2.con_temp5,t2.con_temp6,t2.con_temp7) temp2-->
+    <!--CONCAT_WS(',',t3.con_temp1,t3.con_temp2,t3.con_temp3,t3.con_temp4,t3.con_temp5,t3.con_temp6,t3.con_temp7) temp3-->
+    <!--CONCAT_WS(',',t4.con_temp1,t4.con_temp2,t4.con_temp3,t4.con_temp4,t4.con_temp5,t4.con_temp6,t4.con_temp7) temp4-->
+    <!--CONCAT_WS(',',t5.con_temp1,t5.con_temp2,t5.con_temp3,t5.con_temp4,t5.con_temp5,t5.con_temp6,t5.con_temp7) temp5-->
+    <!--CONCAT_WS(',',t6.con_temp1,t6.con_temp2,t6.con_temp3,t6.con_temp4,t6.con_temp5,t6.con_temp6,t6.con_temp7) temp6-->
+    <!--CONCAT_WS(',',t7.con_temp1,t7.con_temp2,t7.con_temp3,t7.con_temp4,t7.con_temp5,t7.con_temp6,t7.con_temp7) temp7-->
+    <!--CONCAT_WS(',',t8.con_temp1,t8.con_temp2,t8.con_temp3,t8.con_temp4,t8.con_temp5,t8.con_temp6,t8.con_temp7) temp8-->
+    <!--CONCAT_WS(',',t9.con_temp1,t9.con_temp2,t9.con_temp3,t9.con_temp4,t9.con_temp5,t9.con_temp6,t9.con_temp7) temp8-->
+    <!--CONCAT_WS(',',t10.con_temp1,t10.con_temp2,t10.con_temp3,t10.con_temp4,t10.con_temp5,t10.con_temp6,t10.con_temp7) temp10-->
+    <!--from QQC_MCT t-->
+    <!--left join  QQC_MCT t1 on t1.guid=t.guid and t1.storey=1-->
+    <!--left join  QQC_MCT t2 on t2.guid=t.guid and t2.storey=2-->
+    <!--left join  QQC_MCT t3 on t3.guid=t.guid and t3.storey=3-->
+    <!--left join  QQC_MCT t4 on t4.guid=t.guid and t4.storey=4-->
+    <!--left join  QQC_MCT t5 on t5.guid=t.guid and t5.storey=5-->
+    <!--left join  QQC_MCT t6 on t6.guid=t.guid and t6.storey=6-->
+    <!--left join  QQC_MCT t7 on t7.guid=t.guid and t7.storey=7-->
+    <!--left join  QQC_MCT t8 on t8.guid=t.guid and t8.storey=8-->
+    <!--left join  QQC_MCT t9 on t9.guid=t.guid and t9.storey=9-->
+    <!--left join  QQC_MCT t10 on t10.guid=t.guid and t10.storey=10-->
+
+    <!--where t.guid=#{guid} and PARTS=#{parts}-->
+    <!--limit  1-->
+  <!--</select>-->
 </mapper>

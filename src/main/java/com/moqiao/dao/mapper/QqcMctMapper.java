@@ -30,5 +30,6 @@ public interface QqcMctMapper {
     int updateByPrimaryKey(QqcMct record);
 
     List<QqcMct> selectPriGuid(String Parts);
-
+    List<QqcMct> selectByGuid(String guid);
+    List<QqcMct> selectchart3d(QqcMct record);
 }
