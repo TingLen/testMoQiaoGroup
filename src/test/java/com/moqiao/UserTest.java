@@ -53,4 +53,25 @@ public class UserTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("{\"success\":true,\"message\":\"登陆成功\"}"));
     }
+
+
+    @Test
+    public void getUrlFalid() throws Exception {
+        RequestBuilder request = null;
+        request = get("/user/getUrl")
+                .param("usercode","ssssssssss");
+        mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("{\"success\":false,\"url\":null}"));
+    }
+
+    @Test
+    public void getUrlSuccess() throws Exception {
+        RequestBuilder request = null;
+        request = get("/user/getUrl")
+                .param("usercode","admin");
+        mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("{\"success\":true,\"url\":\":8888\"}"));
+    }
 }

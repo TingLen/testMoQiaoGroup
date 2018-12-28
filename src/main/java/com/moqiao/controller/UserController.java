@@ -1,5 +1,6 @@
 package com.moqiao.controller;
 
+import com.moqiao.message.GetUrlMessage;
 import com.moqiao.message.LoginMessage;
 import com.moqiao.pojo.WorkUser;
 import com.moqiao.service.UserService;
@@ -19,8 +20,6 @@ import java.security.NoSuchAlgorithmException;
 public class UserController {
     @Autowired
     private UserService userService;
-
-    private LoginMessage loginMessage;
 
 
     @ApiOperation(value = "用户登录")
@@ -42,6 +41,26 @@ public class UserController {
         loginMessage.setSuccess(false);
         loginMessage.setMessage("账号或密码错误");
         return loginMessage;
+    }
+
+    @ApiOperation(value = "查找账号归属项目")
+    @ApiImplicitParam(name = "usercode", value = "通过用户名查找用户归属项目url,提供给前端做router拼接", dataType = "string",required = true)
+    @GetMapping("/getUrl")
+    public GetUrlMessage getUrl(String usercode){
+        GetUrlMessage getUrlMessage = new GetUrlMessage();
+        //调用service
+        try {
+            String url = userService.getUrl(usercode);
+            getUrlMessage.setSuccess(true);
+            getUrlMessage.setUrl(url);
+            return getUrlMessage;
+        } catch (Exception e) {
+            e.printStackTrace();
+            getUrlMessage.setSuccess(false);
+            getUrlMessage.setUrl(null);
+            return getUrlMessage;
+        }
+
     }
 
 

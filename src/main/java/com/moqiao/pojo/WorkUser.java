@@ -20,6 +20,8 @@ public class WorkUser {
 
     private String epscode;
 
+    private String url;
+
     public String getUsercode() {
         return usercode;
     }
@@ -82,5 +84,13 @@ public class WorkUser {
 
     public void setEpscode(String epscode) {
         this.epscode = epscode == null ? null : epscode.trim();
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
     }
 }
