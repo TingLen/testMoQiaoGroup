@@ -10,6 +10,7 @@
     <result column="DEPTCODE" jdbcType="VARCHAR" property="deptcode" />
     <result column="TITLECODE" jdbcType="VARCHAR" property="titlecode" />
     <result column="EPSCODE" jdbcType="VARCHAR" property="epscode" />
+    <result column="URL" jdbcType="VARCHAR" property="url" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    USERCODE, USERNAME, USERSEX, DEPTTYPE, USERPASSWORD, DEPTCODE, TITLECODE, EPSCODE
+    USERCODE, USERNAME, USERSEX, DEPTTYPE, USERPASSWORD, DEPTCODE, TITLECODE, EPSCODE, 
+    URL
   </sql>
   <select id="selectByExample" parameterType="com.moqiao.pojo.WorkUserExample" resultMap="BaseResultMap">
     select
@@ -105,10 +107,12 @@
   <insert id="insert" parameterType="com.moqiao.pojo.WorkUser">
     insert into work_user (USERCODE, USERNAME, USERSEX, 
       DEPTTYPE, USERPASSWORD, DEPTCODE, 
-      TITLECODE, EPSCODE)
+      TITLECODE, EPSCODE, URL
+      )
     values (#{usercode,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{usersex,jdbcType=VARCHAR}, 
       #{depttype,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR}, #{deptcode,jdbcType=VARCHAR}, 
-      #{titlecode,jdbcType=VARCHAR}, #{epscode,jdbcType=VARCHAR})
+      #{titlecode,jdbcType=VARCHAR}, #{epscode,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.moqiao.pojo.WorkUser">
     insert into work_user
@@ -137,6 +141,9 @@
       <if test="epscode != null">
         EPSCODE,
       </if>
+      <if test="url != null">
+        URL,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="usercode != null">
@@ -162,6 +169,9 @@
       </if>
       <if test="epscode != null">
         #{epscode,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -198,6 +208,9 @@
       <if test="record.epscode != null">
         EPSCODE = #{record.epscode,jdbcType=VARCHAR},
       </if>
+      <if test="record.url != null">
+        URL = #{record.url,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,7 +225,8 @@
       USERPASSWORD = #{record.userpassword,jdbcType=VARCHAR},
       DEPTCODE = #{record.deptcode,jdbcType=VARCHAR},
       TITLECODE = #{record.titlecode,jdbcType=VARCHAR},
-      EPSCODE = #{record.epscode,jdbcType=VARCHAR}
+      EPSCODE = #{record.epscode,jdbcType=VARCHAR},
+      URL = #{record.url,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +255,9 @@
       <if test="epscode != null">
         EPSCODE = #{epscode,jdbcType=VARCHAR},
       </if>
+      <if test="url != null">
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
     </set>
     where USERCODE = #{usercode,jdbcType=VARCHAR}
   </update>
@@ -252,7 +269,8 @@
       USERPASSWORD = #{userpassword,jdbcType=VARCHAR},
       DEPTCODE = #{deptcode,jdbcType=VARCHAR},
       TITLECODE = #{titlecode,jdbcType=VARCHAR},
-      EPSCODE = #{epscode,jdbcType=VARCHAR}
+      EPSCODE = #{epscode,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR}
     where USERCODE = #{usercode,jdbcType=VARCHAR}
   </update>
 </mapper>
