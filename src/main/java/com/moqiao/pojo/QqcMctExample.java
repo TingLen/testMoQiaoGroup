@@ -1,10 +1,14 @@
 package com.moqiao.pojo;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class QqcMctExample {
     protected String orderByClause;
 

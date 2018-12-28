@@ -367,4 +367,8 @@ public class QqcMct {
     public void setTempcc(BigDecimal tempcc) {
         this.tempcc = tempcc;
     }
+
+
+
+
 }
