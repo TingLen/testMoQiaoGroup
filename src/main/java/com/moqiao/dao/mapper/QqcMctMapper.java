@@ -1,5 +1,6 @@
 package com.moqiao.dao.mapper;
 
+import com.moqiao.message.ConcreteTempMessage;
 import com.moqiao.pojo.QqcMct;
 import com.moqiao.pojo.QqcMctExample;
 import java.math.BigDecimal;
@@ -32,4 +33,5 @@ public interface QqcMctMapper {
     List<QqcMct> selectPriGuid(String Parts);
     List<QqcMct> selectByGuid(String guid);
     List<QqcMct> selectchart3d(QqcMct record);
+    List<ConcreteTempMessage> selectConcreteTempByStorey(BigDecimal storey);
 }
