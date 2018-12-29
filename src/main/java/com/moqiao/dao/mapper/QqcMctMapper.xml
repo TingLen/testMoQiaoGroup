@@ -766,4 +766,39 @@
 		) PMAX,CTSTATUS,LBWCB FROM qqc_mct WHERE STOREY = #{storey} ORDER BY DATETIME
 ) t1;
   </select>
+
+  <!--
+  * 1.取出storey层传感器数据
+  * 2.取出storey+1层传感器温度
+  * 3.两层温度每个对象按照GUID进行相减
+  -->
+
+  <select id="selectItemDiffTempByStorey" parameterType="int" resultType="com.moqiao.message.ItemDiffTempMessage">
+    SELECT t.*,GREATEST(
+    CASE WHEN ABS(t.B)>200 THEN 0 ELSE ABS(t.B) END,
+    CASE WHEN ABS(t.C)>200 THEN 0 ELSE ABS(t.C) END,
+    CASE WHEN ABS(t.D)>200 THEN 0 ELSE ABS(t.D) END,
+    CASE WHEN ABS(t.E)>200 THEN 0 ELSE ABS(t.E) END,
+    CASE WHEN ABS(t.F)>200 THEN 0 ELSE ABS(t.F) END,
+    CASE WHEN ABS(t.G)>200 THEN 0 ELSE ABS(t.G) END,
+    CASE WHEN ABS(t.A)>200 THEN 0 ELSE ABS(t.A) END
+    ) PMAX FROM
+    (SELECT t.DATETIME date,
+    t.CON_TEMP1-t2.CON_TEMP1 A,
+    t.CON_TEMP2-t2.CON_TEMP2 B,
+    t.CON_TEMP3-t2.CON_TEMP3 C,
+    t.CON_TEMP4-t2.CON_TEMP4 D,
+    t.CON_TEMP5-t2.CON_TEMP5 E,
+    t.CON_TEMP6-t2.CON_TEMP6 F,
+    t.CON_TEMP7-t2.CON_TEMP7 G,
+    t.LBWCB STATUS,
+    t.CTSTATUS
+    FROM qqc_mct t
+    LEFT JOIN qqc_mct t2
+    ON t.GUID = t2.GUID
+    AND t2.STOREY=#{story}+1
+    WHERE t.STOREY = #{story}
+    ORDER BY t.DATETIME DESC) t
+
+  </select>
 </mapper>

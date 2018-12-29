@@ -2,6 +2,7 @@ package com.moqiao.controller;
 
 import com.moqiao.message.ConcreteTempMessage;
 import com.moqiao.message.IODiffTempMessage;
+import com.moqiao.message.ItemDiffTempMessage;
 import com.moqiao.message.SensorTempMessage;
 import com.moqiao.service.StandardService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -44,6 +45,16 @@ public class StandardController {
     public List<IODiffTempMessage> getIODiffTempByStorey(BigDecimal storey){
         //调用service
         return standardService.getIODiffTempByStorey(storey);
+
+    }
+
+    @ApiOperation(value = "获取层间温差")
+    @ApiImplicitParam(name = "storey", value = "层数，1代表1层-2层，2代表2层-3层",dataType = "BigDecimal",required = true)
+    @GetMapping("/itemDiffTemp")
+    public List<ItemDiffTempMessage> getItemDiffTempByStory(int storey){
+        //调用service
+        return standardService.getItemDiffTempByStory(storey);
+
 
     }
 

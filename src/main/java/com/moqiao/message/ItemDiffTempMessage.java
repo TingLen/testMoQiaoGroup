@@ -3,20 +3,18 @@ package com.moqiao.message;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/***
- * 传感器温度
- */
-public class SensorTempMessage {
-    private Date date;//日期
-    private BigDecimal A;//A传感器
+public class ItemDiffTempMessage {
+    private Date date;
+    private BigDecimal A;
     private BigDecimal B;
     private BigDecimal C;
     private BigDecimal D;
     private BigDecimal E;
     private BigDecimal F;
     private BigDecimal G;
-    private String GUID;
-    private String CTSTATUS;//是否正常
+    private BigDecimal PMAX;
+    private String CTSTATUS;
+    private String STATUS;
 
     public Date getDate() {
         return date;
@@ -82,6 +80,14 @@ public class SensorTempMessage {
         G = g;
     }
 
+    public BigDecimal getPMAX() {
+        return PMAX;
+    }
+
+    public void setPMAX(BigDecimal PMAX) {
+        this.PMAX = PMAX;
+    }
+
     public String getCTSTATUS() {
         return CTSTATUS;
     }
@@ -90,11 +96,11 @@ public class SensorTempMessage {
         this.CTSTATUS = CTSTATUS;
     }
 
-    public String getGUID() {
-        return GUID;
+    public String getSTATUS() {
+        return STATUS;
     }
 
-    public void setGUID(String GUID) {
-        this.GUID = GUID;
+    public void setSTATUS(String STATUS) {
+        this.STATUS = STATUS;
     }
 }

@@ -3,6 +3,7 @@ package com.moqiao.service;
 import com.moqiao.dao.mapper.QqcMctMapper;
 import com.moqiao.message.ConcreteTempMessage;
 import com.moqiao.message.IODiffTempMessage;
+import com.moqiao.message.ItemDiffTempMessage;
 import com.moqiao.message.SensorTempMessage;
 import com.moqiao.pojo.QqcMct;
 import com.moqiao.pojo.QqcMctExample;
@@ -55,5 +56,10 @@ public class StandardService {
     public List<IODiffTempMessage> getIODiffTempByStorey(BigDecimal storey){
 
         return qqcMctMapper.selectIODiffTempByStorey(storey);
+    }
+
+    public List<ItemDiffTempMessage> getItemDiffTempByStory(int storey){
+        List<ItemDiffTempMessage> a = qqcMctMapper.selectItemDiffTempByStorey(storey);
+        return qqcMctMapper.selectItemDiffTempByStorey(storey);
     }
 }
