@@ -2,6 +2,7 @@ package com.moqiao.service;
 
 import com.moqiao.dao.mapper.QqcMctMapper;
 import com.moqiao.message.ConcreteTempMessage;
+import com.moqiao.message.IODiffTempMessage;
 import com.moqiao.message.SensorTempMessage;
 import com.moqiao.pojo.QqcMct;
 import com.moqiao.pojo.QqcMctExample;
@@ -49,5 +50,10 @@ public class StandardService {
         //根据层数取出混凝土温度，混凝土温度为7个传感器的最大温度值
         List<ConcreteTempMessage> concreteTempMessageList = qqcMctMapper.selectConcreteTempByStorey(storey);
         return concreteTempMessageList;
+    }
+
+    public List<IODiffTempMessage> getIODiffTempByStorey(BigDecimal storey){
+
+        return qqcMctMapper.selectIODiffTempByStorey(storey);
     }
 }
