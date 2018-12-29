@@ -28,15 +28,15 @@ public class MctController {
     @Autowired
     private QqcMctMapper qqcMctMapper;
 
-    private QqcMctExample qqcMctExample=new QqcMctExample();
+//    private QqcMctExample qqcMctExample=new QqcMctExample();
     /**
      * @Author: yu
      * @Date: 2018/12/27
      */
     @ApiOperation(value = "获取首页的三维图数据")
     @ApiImplicitParam(name = "Parts", value = "部位（承台1，承台2）",dataType = "String",required = true)
-    @RequestMapping(value = "/Chart3d", method = RequestMethod.GET)
-    public List<QqcMessage> Chart3d(String Parts) throws Exception{
+    @RequestMapping(value = "/chart3d", method = RequestMethod.GET)
+    public List<QqcMessage> chart3d(String Parts) throws Exception{
         List<QqcMessage> resultMctlist=new ArrayList<QqcMessage>();
 
         //根据时间顺序获取所有合并的Guid
