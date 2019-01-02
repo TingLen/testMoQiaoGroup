@@ -801,4 +801,19 @@
     ORDER BY t.DATETIME DESC) t
 
   </select>
+
+  <select id="selectWaterTempByStorey" parameterType="java.math.BigDecimal" resultType="com.moqiao.message.WaterTempMessage">
+    SELECT t.*,
+    GREATEST(ABS(t.INPUT-t.OUTPUT1),ABS(t.INPUT-t.OUTPUT2)) IOMAX
+    FROM
+    (SELECT DATETIME,
+    WATERINLET INPUT,
+    WATEROUTLET1 OUTPUT1,
+    WATEROUTLET2 OUTPUT2,
+    CTSTATUS,
+    SWWSB STATUS
+    FROM qqc_mct
+    WHERE STOREY=#{storey}
+    ORDER BY DATETIME DESC ) t;
+  </select>
 </mapper>

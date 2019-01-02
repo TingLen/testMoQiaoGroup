@@ -1,10 +1,7 @@
 package com.moqiao.service;
 
 import com.moqiao.dao.mapper.QqcMctMapper;
-import com.moqiao.message.ConcreteTempMessage;
-import com.moqiao.message.IODiffTempMessage;
-import com.moqiao.message.ItemDiffTempMessage;
-import com.moqiao.message.SensorTempMessage;
+import com.moqiao.message.*;
 import com.moqiao.pojo.QqcMct;
 import com.moqiao.pojo.QqcMctExample;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +56,11 @@ public class StandardService {
     }
 
     public List<ItemDiffTempMessage> getItemDiffTempByStory(int storey){
-        List<ItemDiffTempMessage> a = qqcMctMapper.selectItemDiffTempByStorey(storey);
         return qqcMctMapper.selectItemDiffTempByStorey(storey);
+    }
+
+    public List<WaterTempMessage> getWaterTempByStory(BigDecimal storey){
+        List<WaterTempMessage> list = qqcMctMapper.selectWaterTempByStorey(storey);
+        return qqcMctMapper.selectWaterTempByStorey(storey);
     }
 }
