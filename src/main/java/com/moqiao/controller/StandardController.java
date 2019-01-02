@@ -57,9 +57,16 @@ public class StandardController {
     @ApiImplicitParam(name = "storey", value = "层数",dataType = "BigDecimal",required = true)
     @GetMapping("/getWaterTemp")
     public List<WaterTempMessage> getWaterTempByStory(BigDecimal storey){
-        List<WaterTempMessage> list = standardService.getWaterTempByStory(storey);
         //调用service
-        return list;
+        return standardService.getWaterTempByStory(storey);
+    }
+
+    @ApiOperation(value = "获取表面与环境温差")
+    @ApiImplicitParam(name = "storey", value = "层数",dataType = "BigDecimal",required = true)
+    @GetMapping("/getSurEnvTempDiff")
+    public List<SurEnvTempDiffMessage> getSurEnvTempDiffByStorey(BigDecimal storey){
+        //调用service
+        return standardService.selectSurEnvTempDiffByStorey(storey);
     }
 
 }

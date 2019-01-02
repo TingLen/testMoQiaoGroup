@@ -60,7 +60,9 @@ public class StandardService {
     }
 
     public List<WaterTempMessage> getWaterTempByStory(BigDecimal storey){
-        List<WaterTempMessage> list = qqcMctMapper.selectWaterTempByStorey(storey);
         return qqcMctMapper.selectWaterTempByStorey(storey);
+    }
+    public List<SurEnvTempDiffMessage> selectSurEnvTempDiffByStorey(BigDecimal storey){
+        return qqcMctMapper.selectSurEnvTempDiffByStorey(storey);
     }
 }

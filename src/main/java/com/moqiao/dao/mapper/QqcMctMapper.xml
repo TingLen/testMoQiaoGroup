@@ -806,7 +806,7 @@
     SELECT t.*,
     GREATEST(ABS(t.INPUT-t.OUTPUT1),ABS(t.INPUT-t.OUTPUT2)) IOMAX
     FROM
-    (SELECT DATETIME,
+    (SELECT DATETIME date,
     WATERINLET INPUT,
     WATEROUTLET1 OUTPUT1,
     WATEROUTLET2 OUTPUT2,
@@ -816,4 +816,21 @@
     WHERE STOREY=#{storey}
     ORDER BY DATETIME DESC ) t;
   </select>
+
+  <select id="selectSurEnvTempDiffByStorey" parameterType="java.math.BigDecimal" resultType="com.moqiao.message.SurEnvTempDiffMessage">
+    SELECT t.*,
+    GREATEST(ABS(t.A-t.ET),ABS(t.E-t.ET),ABS(t.F-t.ET)) TD
+    FROM (
+    SELECT DATETIME date,
+    CON_TEMP1 A,
+    CON_TEMP5 E,
+    CON_TEMP6 F,
+    ET,
+    CTSTATUS
+    FROM qqc_mct
+    WHERE STOREY = #{storey}
+    ORDER BY DATETIME DESC
+    ) t;
+  </select>
+
 </mapper>
