@@ -33,10 +33,10 @@ public interface QqcMctMapper {
     List<QqcMct> selectPriGuid(String Parts);
     List<QqcMct> selectByGuid(String guid);
     List<QqcMct> selectchart3d(QqcMct record);
-    List<ConcreteTempMessage> selectConcreteTempByStorey(BigDecimal storey);
-    List<IODiffTempMessage> selectIODiffTempByStorey(BigDecimal storey);
-    List<ItemDiffTempMessage> selectItemDiffTempByStorey(int storey);
-    List<WaterTempMessage> selectWaterTempByStorey(BigDecimal storey);
-    List<SurEnvTempDiffMessage> selectSurEnvTempDiffByStorey(BigDecimal storey);
-    List<CoolingRateMessage> selectCoolingRateByStorey(BigDecimal storey);
+    List<ConcreteTempMessage> selectConcreteTempByStorey(@Param("storey") BigDecimal storey,@Param("parts")String parts);
+    List<IODiffTempMessage> selectIODiffTempByStorey(@Param("storey")BigDecimal storey,@Param("parts")String parts);
+    List<ItemDiffTempMessage> selectItemDiffTempByStorey(@Param("storey")int storey,@Param("parts")String parts);
+    List<WaterTempMessage> selectWaterTempByStorey(@Param("storey")BigDecimal storey,@Param("parts")String parts);
+    List<SurEnvTempDiffMessage> selectSurEnvTempDiffByStorey(@Param("storey")BigDecimal storey,@Param("parts")String parts);
+    List<CoolingRateMessage> selectCoolingRateByStorey(@Param("storey")BigDecimal storey,@Param("parts")String parts);
 }

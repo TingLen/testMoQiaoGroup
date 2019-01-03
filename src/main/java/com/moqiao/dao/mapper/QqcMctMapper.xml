@@ -740,7 +740,7 @@
   <!--</select>-->
 
   <!--取混凝土温度，7个传感器点的最大值-->
-  <select id="selectConcreteTempByStorey" parameterType="java.math.BigDecimal" resultType="com.moqiao.message.ConcreteTempMessage">
+  <select id="selectConcreteTempByStorey"  resultType="com.moqiao.message.ConcreteTempMessage">
     SELECT DATETIME,CTSTATUS,CTMAXB STATUS,GREATEST(
   CASE WHEN CON_TEMP1>250 THEN 0 ELSE CON_TEMP1 END,
   CASE WHEN CON_TEMP2>250 THEN 0 ELSE CON_TEMP2 END,
@@ -749,13 +749,13 @@
   CASE WHEN CON_TEMP5>250 THEN 0 ELSE CON_TEMP5 END,
   CASE WHEN CON_TEMP6>250 THEN 0 ELSE CON_TEMP6 END,
   CASE WHEN CON_TEMP7>250 THEN 0 ELSE CON_TEMP7 END
-  ) PMAX FROM qqc_mct T WHERE STOREY = #{storey} ORDER BY DATETIME;
+  ) PMAX FROM qqc_mct T WHERE STOREY = #{storey} AND PARTS = #{parts} ORDER BY DATETIME;
   </select>
 
   <!--里表温差，取A E F三个传感器的值，以及七个传感器中的最大值，再做差值计算-->
-  <select id="selectIODiffTempByStorey" parameterType="java.math.BigDecimal" resultType="com.moqiao.message.IODiffTempMessage">
+  <select id="selectIODiffTempByStorey" resultType="com.moqiao.message.IODiffTempMessage">
   SELECT t1.*,PMAX-LEAST(A,E,F) TD from (
-	SELECT DATETIME,CON_TEMP1 A,CON_TEMP5 E,CON_TEMP6 F, GREATEST(
+	SELECT DATETIME date,CON_TEMP1 A,CON_TEMP5 E,CON_TEMP6 F, GREATEST(
 		CASE WHEN CON_TEMP1>250 THEN 0 ELSE CON_TEMP1 END,
 		CASE WHEN CON_TEMP2>250 THEN 0 ELSE CON_TEMP2 END,
 		CASE WHEN CON_TEMP3>250 THEN 0 ELSE CON_TEMP3 END,
@@ -763,7 +763,7 @@
 		CASE WHEN CON_TEMP5>250 THEN 0 ELSE CON_TEMP5 END,
 		CASE WHEN CON_TEMP6>250 THEN 0 ELSE CON_TEMP6 END,
 		CASE WHEN CON_TEMP7>250 THEN 0 ELSE CON_TEMP7 END
-		) PMAX,CTSTATUS,LBWCB FROM qqc_mct WHERE STOREY = #{storey} ORDER BY DATETIME
+		) PMAX,CTSTATUS,LBWCB FROM qqc_mct WHERE STOREY = #{storey} AND PARTS = #{parts} ORDER BY DATETIME
 ) t1;
   </select>
 
@@ -773,7 +773,7 @@
   * 3.两层温度每个对象按照GUID进行相减
   -->
 
-  <select id="selectItemDiffTempByStorey" parameterType="int" resultType="com.moqiao.message.ItemDiffTempMessage">
+  <select id="selectItemDiffTempByStorey" resultType="com.moqiao.message.ItemDiffTempMessage">
     SELECT t.*,GREATEST(
     CASE WHEN ABS(t.B)>200 THEN 0 ELSE ABS(t.B) END,
     CASE WHEN ABS(t.C)>200 THEN 0 ELSE ABS(t.C) END,
@@ -796,13 +796,14 @@
     FROM qqc_mct t
     LEFT JOIN qqc_mct t2
     ON t.GUID = t2.GUID
-    AND t2.STOREY=#{story}+1
-    WHERE t.STOREY = #{story}
+    AND t2.STOREY=#{storey}+1
+    WHERE t.STOREY = #{storey}
+    AND t.PARTS = #{parts}
     ORDER BY t.DATETIME DESC) t
 
   </select>
 
-  <select id="selectWaterTempByStorey" parameterType="java.math.BigDecimal" resultType="com.moqiao.message.WaterTempMessage">
+  <select id="selectWaterTempByStorey" resultType="com.moqiao.message.WaterTempMessage">
     SELECT t.*,
     GREATEST(ABS(t.INPUT-t.OUTPUT1),ABS(t.INPUT-t.OUTPUT2)) IOMAX
     FROM
@@ -814,10 +815,11 @@
     SWWSB STATUS
     FROM qqc_mct
     WHERE STOREY=#{storey}
+    AND PARTS = #{parts}
     ORDER BY DATETIME DESC ) t;
   </select>
 
-  <select id="selectSurEnvTempDiffByStorey" parameterType="java.math.BigDecimal" resultType="com.moqiao.message.SurEnvTempDiffMessage">
+  <select id="selectSurEnvTempDiffByStorey" resultType="com.moqiao.message.SurEnvTempDiffMessage">
     SELECT t.*,
     GREATEST(ABS(t.A-t.ET),ABS(t.E-t.ET),ABS(t.F-t.ET)) TD
     FROM (
@@ -829,11 +831,12 @@
     CTSTATUS
     FROM qqc_mct
     WHERE STOREY = #{storey}
+    AND PARTS = #{parts}
     ORDER BY DATETIME DESC
     ) t;
   </select>
 
-  <select id="selectCoolingRateByStorey" parameterType="java.math.BigDecimal" resultType="com.moqiao.message.CoolingRateMessage">
+  <select id="selectCoolingRateByStorey" resultType="com.moqiao.message.CoolingRateMessage">
     SELECT *,
     (t.C-t.PC) TR
      FROM
@@ -843,29 +846,29 @@
     t.JWSLB STATUS,
     t.GUID,
     (SELECT t2.CON_TEMP3 FROM (SELECT * FROM qqc_mct WHERE id IN(
-    SELECT MIN(id) FROM qqc_mct WHERE  DATE_FORMAT(DATETIME,'%H')='00' AND STOREY = #{storey} GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
+    SELECT MIN(id) FROM qqc_mct WHERE  DATE_FORMAT(DATETIME,'%H')='00' AND STOREY = #{storey} AND PARTS = #{parts} GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
     UNION
     SELECT * FROM qqc_mct WHERE id IN(
-    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='06' AND STOREY =  #{storey}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
+    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='06' AND STOREY =  #{storey} AND PARTS = #{parts}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
     UNION
     SELECT * FROM qqc_mct WHERE id IN(
-    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='12' AND STOREY =  #{storey}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
+    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='12' AND STOREY =  #{storey} AND PARTS = #{parts}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
     UNION
     SELECT * FROM qqc_mct WHERE id IN(
-    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='18' AND STOREY =  #{storey}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )) t2
+    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='18' AND STOREY =  #{storey} AND PARTS = #{parts}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )) t2
     WHERE  t2.DATETIME &lt; t.DATETIME ORDER BY DATETIME DESC  LIMIT 1) PC
     FROM
     (SELECT * FROM qqc_mct WHERE id IN(
-    SELECT MIN(id) FROM qqc_mct WHERE  DATE_FORMAT(DATETIME,'%H')='00' AND STOREY =  #{storey} GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
+    SELECT MIN(id) FROM qqc_mct WHERE  DATE_FORMAT(DATETIME,'%H')='00' AND STOREY =  #{storey} AND PARTS = #{parts} GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
     UNION
     SELECT * FROM qqc_mct WHERE id IN(
-    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='06' AND STOREY =  #{storey}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
+    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='06' AND STOREY =  #{storey} AND PARTS = #{parts}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
     UNION
     SELECT * FROM qqc_mct WHERE id IN(
-    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='12' AND STOREY =  #{storey}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
+    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='12' AND STOREY =  #{storey} AND PARTS = #{parts}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
     UNION
     SELECT * FROM qqc_mct WHERE id IN(
-    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='18' AND STOREY =  #{storey}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )) t
+    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='18' AND STOREY =  #{storey} AND PARTS = #{parts}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )) t
     ORDER BY t.DATETIME DESC)t
   </select>
 
