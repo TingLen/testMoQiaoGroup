@@ -1,10 +1,7 @@
 package com.moqiao.service;
 
 import com.moqiao.dao.mapper.QqcMctMapper;
-import com.moqiao.message.ConcreteTempMessage;
-import com.moqiao.message.IODiffTempMessage;
-import com.moqiao.message.ItemDiffTempMessage;
-import com.moqiao.message.SensorTempMessage;
+import com.moqiao.message.*;
 import com.moqiao.pojo.QqcMct;
 import com.moqiao.pojo.QqcMctExample;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +18,11 @@ public class StandardService {
     @Autowired
     private QqcMct qqcMct;
 
-    public List<SensorTempMessage> getSensorTempByStorey(BigDecimal storey){
+    public List<SensorTempMessage> getSensorTempByStorey(BigDecimal storey,String parts){
 
         QqcMctExample example = new QqcMctExample();
         example.setOrderByClause("DATETIME");
-        example.or().andStoreyEqualTo(storey);
+        example.or().andStoreyEqualTo(storey).andPartsEqualTo(parts);
         //根据层数去数据库取值
         List<QqcMct> qqcMctList = qqcMctMapper.selectByExample(example);
         //将取出的值，赋值给SensorTempMessage类
@@ -47,19 +44,28 @@ public class StandardService {
     }
 
 
-    public List<ConcreteTempMessage> getConcreteTempByStorey(BigDecimal storey){
+    public List<ConcreteTempMessage> getConcreteTempByStorey(BigDecimal storey,String parts){
         //根据层数取出混凝土温度，混凝土温度为7个传感器的最大温度值
-        List<ConcreteTempMessage> concreteTempMessageList = qqcMctMapper.selectConcreteTempByStorey(storey);
+        List<ConcreteTempMessage> concreteTempMessageList = qqcMctMapper.selectConcreteTempByStorey(storey,parts);
         return concreteTempMessageList;
     }
 
-    public List<IODiffTempMessage> getIODiffTempByStorey(BigDecimal storey){
+    public List<IODiffTempMessage> getIODiffTempByStorey(BigDecimal storey,String parts){
 
-        return qqcMctMapper.selectIODiffTempByStorey(storey);
+        return qqcMctMapper.selectIODiffTempByStorey(storey,parts);
     }
 
-    public List<ItemDiffTempMessage> getItemDiffTempByStory(int storey){
-        List<ItemDiffTempMessage> a = qqcMctMapper.selectItemDiffTempByStorey(storey);
-        return qqcMctMapper.selectItemDiffTempByStorey(storey);
+    public List<ItemDiffTempMessage> getItemDiffTempByStory(int storey,String parts){
+        return qqcMctMapper.selectItemDiffTempByStorey(storey,parts);
+    }
+
+    public List<WaterTempMessage> getWaterTempByStory(BigDecimal storey,String parts){
+        return qqcMctMapper.selectWaterTempByStorey(storey,parts);
+    }
+    public List<SurEnvTempDiffMessage> selectSurEnvTempDiffByStorey(BigDecimal storey,String parts){
+        return qqcMctMapper.selectSurEnvTempDiffByStorey(storey,parts);
+    }
+    public List<CoolingRateMessage> selectCoolingRateByStorey(BigDecimal storey,String parts){
+        return qqcMctMapper.selectCoolingRateByStorey(storey,parts);
     }
 }

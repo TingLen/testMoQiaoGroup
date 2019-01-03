@@ -1,8 +1,6 @@
 package com.moqiao.dao.mapper;
 
-import com.moqiao.message.ConcreteTempMessage;
-import com.moqiao.message.IODiffTempMessage;
-import com.moqiao.message.ItemDiffTempMessage;
+import com.moqiao.message.*;
 import com.moqiao.pojo.QqcMct;
 import com.moqiao.pojo.QqcMctExample;
 import java.math.BigDecimal;
@@ -35,7 +33,10 @@ public interface QqcMctMapper {
     List<QqcMct> selectPriGuid(String Parts);
     List<QqcMct> selectByGuid(String guid);
     List<QqcMct> selectchart3d(QqcMct record);
-    List<ConcreteTempMessage> selectConcreteTempByStorey(BigDecimal storey);
-    List<IODiffTempMessage> selectIODiffTempByStorey(BigDecimal storey);
-    List<ItemDiffTempMessage> selectItemDiffTempByStorey(int storey);
+    List<ConcreteTempMessage> selectConcreteTempByStorey(@Param("storey") BigDecimal storey,@Param("parts")String parts);
+    List<IODiffTempMessage> selectIODiffTempByStorey(@Param("storey")BigDecimal storey,@Param("parts")String parts);
+    List<ItemDiffTempMessage> selectItemDiffTempByStorey(@Param("storey")int storey,@Param("parts")String parts);
+    List<WaterTempMessage> selectWaterTempByStorey(@Param("storey")BigDecimal storey,@Param("parts")String parts);
+    List<SurEnvTempDiffMessage> selectSurEnvTempDiffByStorey(@Param("storey")BigDecimal storey,@Param("parts")String parts);
+    List<CoolingRateMessage> selectCoolingRateByStorey(@Param("storey")BigDecimal storey,@Param("parts")String parts);
 }
