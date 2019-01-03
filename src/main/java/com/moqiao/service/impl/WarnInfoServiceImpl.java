@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.annotation.WebServlet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class WarnInfoServiceImpl implements WarnInfoService {
@@ -18,15 +20,18 @@ public class WarnInfoServiceImpl implements WarnInfoService {
     private QqcMctwarningnewExample qqcMctwarningnewExample=new QqcMctwarningnewExample();
     @Override
     public List<QqcMctwarningnew> getWarningData(String Parts , String type){
-
-        qqcMctwarningnewExample.or().andWarntyepEqualTo(getWarningType(type));
-
-        return qqcMctwarningnewMapper.selectByExampleWithBLOBs(qqcMctwarningnewExample);
-        //return qqcMctwarningnewMapper.selectwarndata(getWarningType(type));
+        //qqcMctwarningnewExample.or().andWarntyepEqualTo(getWarningType(type));
+        //return qqcMctwarningnewMapper.selectByExampleWithBLOBs(qqcMctwarningnewExample);
+       Map<String,Object> map =new HashMap<>();
+       map.put("Parts",Parts);
+       map.put("warn_type",getWarningType(type));
+       return qqcMctwarningnewMapper.selectwarndata(map);
     }
     private String getWarningType(String type)
     {
         String warn_type;
+        if (type ==null)
+            return null;
         switch (type)
         {
             case "1":
