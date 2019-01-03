@@ -267,7 +267,34 @@
       WARNDATE = #{warndate,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
-  <select id="selectwarndata" parameterType="java.lang.String" resultType="com.moqiao.pojo.QqcMctwarningnew">
-    select * from qqc_mctwarningnew t where WARNTYEP=#{warn_type}
+  <select id="selectwarndata1" parameterType="java.lang.String" resultType="com.moqiao.pojo.QqcMctwarningnew">
+    SELECT distinct t.ID, t.WARNTYEP, t.WARNCONTENT, t.MCTGUID, t.MCTSTOREY,d.DATETIME WARNDATE
+    FROM qqc_mctwarningnew t
+    LEFT JOIN qqc_mct d
+    ON t.MCTGUID=d.GUID
+    <where>
+      <choose>
+        <when test="warn_type!=null">
+         and t.WARNTYEP=#{warn_type}
+        </when>
+        <otherwise>
+          and t.ID BETWEEN (SELECT MAX(qqc_mctwarningnew.ID) FROM qqc_mctwarningnew)-9 AND (SELECT MAX(qqc_mctwarningnew.ID) FROM qqc_mctwarningnew)
+        </otherwise>
+      </choose>
+    </where>
+    ORDER BY t.ID desc
+
+  </select>
+  <select id="selectwarndata" parameterType="map" resultType="com.moqiao.pojo.QqcMctwarningnew">
+    SELECT distinct t.ID, t.WARNTYEP, t.WARNCONTENT, t.MCTGUID, t.MCTSTOREY,d.DATETIME WARNDATE
+    FROM qqc_mctwarningnew t
+    LEFT JOIN qqc_mct d
+    ON t.MCTGUID=d.GUID
+    <if test="warn_type!=null">
+      where  t.WARNTYEP=#{warn_type}  ORDER BY t.ID desc
+    </if>
+    <if test="warn_type==null">
+      ORDER BY t.ID DESC LIMIT 10
+    </if>
   </select>
 </mapper>

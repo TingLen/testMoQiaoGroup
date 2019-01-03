@@ -20,13 +20,15 @@ import java.util.List;
 @RequestMapping("/GetWarningData")
 public class WarnInfoController {
 
+    protected Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private WarnInfoService warnInfoService;
 
     @ApiOperation(value="预警信息", notes="获取预警数据")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Parts", value = "承台部位", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "type", value = "预警类型", required = true, dataType = "String")
+            @ApiImplicitParam(name = "type", value = "预警类型", required = false,dataType = "String")
     })
     @RequestMapping(value = "/getwarn",method=RequestMethod.GET)
     @ResponseBody
@@ -38,4 +40,5 @@ public class WarnInfoController {
 
         return qqcMctwarningnewList;
     }
+
 }

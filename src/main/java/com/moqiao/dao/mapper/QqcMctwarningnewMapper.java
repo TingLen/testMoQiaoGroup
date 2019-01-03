@@ -4,6 +4,8 @@ import com.moqiao.pojo.QqcMctwarningnew;
 import com.moqiao.pojo.QqcMctwarningnewExample;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface QqcMctwarningnewMapper {
@@ -34,5 +36,5 @@ public interface QqcMctwarningnewMapper {
     int updateByPrimaryKeyWithBLOBs(QqcMctwarningnew record);
 
     int updateByPrimaryKey(QqcMctwarningnew record);
-    List<QqcMctwarningnew> selectwarndata(@Param("warn_type") String warn_type);
+    List<QqcMctwarningnew> selectwarndata(Map<String,Object> map);
 }
