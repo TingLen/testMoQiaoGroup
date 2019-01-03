@@ -833,4 +833,40 @@
     ) t;
   </select>
 
+  <select id="selectCoolingRateByStorey" parameterType="java.math.BigDecimal" resultType="com.moqiao.message.CoolingRateMessage">
+    SELECT *,
+    (t.C-t.PC) TR
+     FROM
+    (SELECT t.DATETIME date,
+    t.CON_TEMP3 C,
+    t.CTSTATUS,
+    t.JWSLB STATUS,
+    t.GUID,
+    (SELECT t2.CON_TEMP3 FROM (SELECT * FROM qqc_mct WHERE id IN(
+    SELECT MIN(id) FROM qqc_mct WHERE  DATE_FORMAT(DATETIME,'%H')='00' AND STOREY = #{storey} GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
+    UNION
+    SELECT * FROM qqc_mct WHERE id IN(
+    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='06' AND STOREY =  #{storey}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
+    UNION
+    SELECT * FROM qqc_mct WHERE id IN(
+    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='12' AND STOREY =  #{storey}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
+    UNION
+    SELECT * FROM qqc_mct WHERE id IN(
+    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='18' AND STOREY =  #{storey}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )) t2
+    WHERE  t2.DATETIME &lt; t.DATETIME ORDER BY DATETIME DESC  LIMIT 1) PC
+    FROM
+    (SELECT * FROM qqc_mct WHERE id IN(
+    SELECT MIN(id) FROM qqc_mct WHERE  DATE_FORMAT(DATETIME,'%H')='00' AND STOREY =  #{storey} GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
+    UNION
+    SELECT * FROM qqc_mct WHERE id IN(
+    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='06' AND STOREY =  #{storey}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
+    UNION
+    SELECT * FROM qqc_mct WHERE id IN(
+    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='12' AND STOREY =  #{storey}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )
+    UNION
+    SELECT * FROM qqc_mct WHERE id IN(
+    SELECT MIN(id) FROM qqc_mct WHERE   DATE_FORMAT(DATETIME,'%H')='18' AND STOREY =  #{storey}  GROUP BY	DATE_FORMAT(DATETIME,'%Y-%m-%d') )) t
+    ORDER BY t.DATETIME DESC)t
+  </select>
+
 </mapper>

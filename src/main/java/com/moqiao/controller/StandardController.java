@@ -69,4 +69,12 @@ public class StandardController {
         return standardService.selectSurEnvTempDiffByStorey(storey);
     }
 
+    @ApiOperation(value = "降温速率")
+    @ApiImplicitParam(name = "storey", value = "层数",dataType = "BigDecimal",required = true)
+    @GetMapping("/getCoolingRate")
+    public List<CoolingRateMessage> getCoolingRateByStorey(BigDecimal storey){
+        //调用service
+        return standardService.selectCoolingRateByStorey(storey);
+    }
+
 }

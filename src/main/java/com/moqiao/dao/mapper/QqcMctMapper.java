@@ -38,4 +38,5 @@ public interface QqcMctMapper {
     List<ItemDiffTempMessage> selectItemDiffTempByStorey(int storey);
     List<WaterTempMessage> selectWaterTempByStorey(BigDecimal storey);
     List<SurEnvTempDiffMessage> selectSurEnvTempDiffByStorey(BigDecimal storey);
+    List<CoolingRateMessage> selectCoolingRateByStorey(BigDecimal storey);
 }

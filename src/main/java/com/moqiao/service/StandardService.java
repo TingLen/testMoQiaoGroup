@@ -65,4 +65,7 @@ public class StandardService {
     public List<SurEnvTempDiffMessage> selectSurEnvTempDiffByStorey(BigDecimal storey){
         return qqcMctMapper.selectSurEnvTempDiffByStorey(storey);
     }
+    public List<CoolingRateMessage> selectCoolingRateByStorey(BigDecimal storey){
+        return qqcMctMapper.selectCoolingRateByStorey(storey);
+    }
 }
