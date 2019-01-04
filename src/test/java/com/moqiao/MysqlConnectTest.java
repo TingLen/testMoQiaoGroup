@@ -1,8 +1,8 @@
 package com.moqiao;
 
-import com.moqiao.dao.mapper.WorkUserMapper;
-import com.moqiao.pojo.WorkUser;
-import com.moqiao.pojo.WorkUserExample;
+import com.moqiao.MCT.dao.mapper.WorkUserMapper;
+import com.moqiao.MCT.pojo.WorkUser;
+import com.moqiao.MCT.pojo.WorkUserExample;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -31,7 +31,7 @@
         </javaTypeResolver>
 
         <!-- 生成实体类地址 -->
-        <javaModelGenerator targetPackage="com.moqiao.pojo" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.moqiao.MCT.pojo" targetProject="src/main/java">
             <!-- 从数据库返回的值被清理前后的空格 -->
             <property name="trimStrings" value="true" />
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
@@ -39,13 +39,13 @@
         </javaModelGenerator>
 
         <!-- 生成mapper xml文件 -->
-        <sqlMapGenerator targetPackage="com.moqiao.dao.mapper"  targetProject="src/main/java">
+        <sqlMapGenerator targetPackage="com.moqiao.MCT.dao.mapper" targetProject="src/main/java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
 
         <!-- 生成mapper xml对应Client-->
-        <javaClientGenerator targetPackage="com.moqiao.dao.mapper" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.moqiao.MCT.dao.mapper" targetProject="src/main/java" type="XMLMAPPER">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>

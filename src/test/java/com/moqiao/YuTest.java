@@ -1,6 +1,6 @@
 package com.moqiao;
 
-import com.moqiao.controller.UserController;
+import com.moqiao.MCT.controller.UserController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
